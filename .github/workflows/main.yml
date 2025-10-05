@@ -1,9 +1,17 @@
-name: CI
+name: main
 on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache
+          key: cache-8b0513d
+      - name: prime-cache-8b0513d
+        run: echo "Cache hit or miss":${{ steps.cache.outputs.cache-hit }}"
       - name: Run a script
         run: echo "Hello, world!"
